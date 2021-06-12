@@ -12,6 +12,17 @@ spec:
       labels:
         app: app1
     spec:
+      volumes:
+        - name: shared-files
+          emptyDir: {}
       containers:
-        - name: app1
-          image: findarkside/app1:c5af7db46eda490a272baa26380f6a26f772c80d
+        - name: app1-timestamp
+          image: findarkside/app1-timestamp:c23901d77d04d9aff1dbea94
+          volumeMounts:
+          - name: shared-files
+            mountPath: /usr/src/app/files
+        - name: app1-hash
+          image: findarkside/app1-hash:40ad443007d55bbda61ab1dd
+          volumeMounts:
+          - name: shared-files
+            mountPath: /usr/src/app/files
