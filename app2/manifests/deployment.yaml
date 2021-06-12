@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: app2
-          image: findarkside/app2:eb023429fd769b45bc42f185220a8e56841ff966
+          image: findarkside/app2:addf56942ad14f95352f242e1bf10b1b8aab1609
