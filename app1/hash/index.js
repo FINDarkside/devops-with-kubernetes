@@ -10,7 +10,8 @@ const app = express()
 
 app.get('*', (req, res) => {
     const timestamp = fs.readFileSync('/usr/src/app/files/timestamp')
-    res.end(timestamp + ' ' + hash)
+    const pongCount = fs.readFileSync('/usr/src/app/files/pongCount')
+    res.end(timestamp + ' ' + hash + '.\n Ping / Pongs: '+ pongCount)
 })
 
 app.listen(3000, () => {

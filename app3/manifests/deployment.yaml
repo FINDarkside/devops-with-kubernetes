@@ -12,6 +12,13 @@ spec:
       labels:
         app: app3
     spec:
+      volumes:
+        - name: shared-files
+          persistentVolumeClaim:
+            claimName: example-claim
       containers:
         - name: app3
-          image: findarkside/app3:e9eacdf2dd9d3e497ddf4061d28f66e5434af2a8
+          image: findarkside/app3-hash:2212d43153ad0822abc556ea
+          volumeMounts:
+            - name: shared-files
+              mountPath: /usr/src/app/files

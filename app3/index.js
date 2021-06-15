@@ -1,10 +1,13 @@
 const express = require('express')
+const fs = require('fs')
 
 const app = express()
 
 let counter = 0
 app.get('*', (req, res) => {
-    res.end('pong ' + counter++)
+    counter++
+    fs.writeFileSync('/usr/src/app/files/pongCount', counter.toString())
+    res.end('pong ' + counter)
 })
 
 app.listen(3000, () => {

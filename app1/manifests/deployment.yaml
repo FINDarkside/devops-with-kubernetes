@@ -14,15 +14,16 @@ spec:
     spec:
       volumes:
         - name: shared-files
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: example-claim
       containers:
         - name: app1-timestamp
           image: findarkside/app1-timestamp:c23901d77d04d9aff1dbea94
           volumeMounts:
-          - name: shared-files
-            mountPath: /usr/src/app/files
+            - name: shared-files
+              mountPath: /usr/src/app/files
         - name: app1-hash
-          image: findarkside/app1-hash:40ad443007d55bbda61ab1dd
+          image: findarkside/app1-hash:9c48e2e4bbf19518de74a3c0
           volumeMounts:
-          - name: shared-files
-            mountPath: /usr/src/app/files
+            - name: shared-files
+              mountPath: /usr/src/app/files

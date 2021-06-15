@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "commonjs",
+        "checkJs": true,
+        "strictNullChecks": false,
+        "maxNodeModuleJsDepth": 5
+    }
+}

@@ -1,1 +1,0 @@
-kubectl create deployment main-app-dep --image=findarkside/main-app
