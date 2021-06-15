@@ -12,6 +12,13 @@ spec:
       labels:
         app: app2
     spec:
+      volumes:
+        - name: shared-files
+          persistentVolumeClaim:
+            claimName: example-claim
       containers:
         - name: app2
-          image: findarkside/app2:addf56942ad14f95352f242e1bf10b1b8aab1609
+          image: findarkside/app2:fcb39f3ee3231e7236bc4117
+          volumeMounts:
+            - name: shared-files
+              mountPath: /usr/src/app/files

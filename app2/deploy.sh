@@ -1,1 +1,3 @@
-kubectl create deployment app2-dep --image=findarkside/app2
+kubectl apply -f ./manifests/deployment.yaml
+kubectl apply -f ./manifests/ingress.yaml
+kubectl apply -f ./manifests/service.yaml
