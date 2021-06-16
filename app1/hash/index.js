@@ -12,7 +12,7 @@ const app = express()
 app.get('/', async (req, res) => {
     const timestamp = fs.readFileSync('/usr/src/app/files/timestamp')
     const pongCount = await fetch('http://app3-svc/').then(r => r.text())
-    res.end(timestamp + ' ' + hash + '.\n Ping / Pongs: '+ pongCount)
+    res.end(process.env.MESSAGE + '\n' + timestamp + ' ' + hash + '.\n Ping / Pongs: ' + pongCount)
 })
 
 app.listen(3000, () => {

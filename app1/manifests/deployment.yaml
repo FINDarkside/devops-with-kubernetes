@@ -24,7 +24,13 @@ spec:
             - name: shared-files
               mountPath: /usr/src/app/files
         - name: app1-hash
-          image: findarkside/app1-hash:ed67133e015605d90bf7855b
+          image: findarkside/app1-hash:0e88d06ed139fccadc495764
           volumeMounts:
             - name: shared-files
               mountPath: /usr/src/app/files
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: example-config
+                  key: MESSAGE
