@@ -23,7 +23,7 @@ spec:
             - name: shared-files
               mountPath: /usr/src/app/files
         - name: app1-hash
-          image: findarkside/app1-hash:9c48e2e4bbf19518de74a3c0
+          image: findarkside/app1-hash:ed67133e015605d90bf7855b
           volumeMounts:
             - name: shared-files
               mountPath: /usr/src/app/files
