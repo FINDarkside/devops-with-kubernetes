@@ -10,3 +10,7 @@ spec:
         backend:
           serviceName: app2-svc
           servicePort: 2345
+      - path: /todos
+        backend:
+          serviceName: app2-svc
+          servicePort: 2348

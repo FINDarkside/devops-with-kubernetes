@@ -7,6 +7,11 @@ spec:
   selector:
     app: app2
   ports:
-    - port: 2345
+    - name: web
+      port: 2345
       protocol: TCP
       targetPort: 3000
+    - name: api
+      port: 2348
+      protocol: TCP
+      targetPort: 3001

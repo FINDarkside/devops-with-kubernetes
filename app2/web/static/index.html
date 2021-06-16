@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+    <meta charset=utf-8>
+    <title>Hello world!</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <p>Hello world!</p>
+    <img width="300" src="/image.jpg">
+    <div id="app">
+        <input v-model="newTodo" type="text" name="todo" maxlength="140">
+        <button v-on:click="submit">Create TODO</button>
+        <ul>
+            <li v-for="todo in todos">{{todo.text}}</li>
+        </ul>
+    </div>
+
+</body>
+
+<script>
+    //const apiUrl = 'http://localhost:3001/todos'
+    const apiUrl = 'http://localhost:8081/todos'
+    const app = new Vue({
+        el: '#app',
+        data: {
+            todos: [],
+            newTodo: ''
+        },
+        mounted: async function () {
+            this.todos = await fetch(apiUrl).then(r => r.json())
+        },
+        methods: {
+            submit: async function () {
+                const todo = { text: this.newTodo }
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(todo),
+                })
+                this.todos.push(todo)
+            },
+        }
+    })
+
+</script>
+
+</html>
