@@ -15,4 +15,7 @@ spec:
     spec:
       containers:
         - name: app3
-          image: findarkside/app3:3dda63315ef6308eaf40306e
+          image: findarkside/app3:5ecb1b2d1fc063b80b206a2c
+          envFrom:
+          - secretRef:
+              name: pg-password
