@@ -24,4 +24,7 @@ spec:
             - name: shared-files
               mountPath: /usr/src/app/files
         - name: app2-api
-          image: findarkside/app2-api:c672e4e68284256e823a8dbc
+          image: findarkside/app2-api:1c3b37aa56e28d78653f06ab
+          envFrom:
+          - secretRef:
+              name: pg-password
