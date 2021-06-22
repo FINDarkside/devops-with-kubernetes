@@ -1,3 +1,2 @@
-kubectl apply -f ./manifests/deployment.yaml
-kubectl apply -f ./manifests/ingress.yaml
-kubectl apply -f ./manifests/service.yaml
+kubeseal -o yaml < secret.yaml > ./manifests/sealedsecret.yaml
+kubectl apply -f ./manifests/

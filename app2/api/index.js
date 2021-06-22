@@ -40,6 +40,11 @@ app.get('/todos', async (req, res) => {
     res.json(todos.rows)
 })
 
+// For health checks
+app.get('/', (req, res) => {
+    res.status(200).end()
+})
+
 
 async function initApp() {
     const res = await pool.query(`

@@ -4,10 +4,10 @@ metadata:
   name: app1-svc
   namespace: main-app
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: app1
   ports:
-    - port: 2346
+    - port: 80
       protocol: TCP
       targetPort: 3000

@@ -47,7 +47,6 @@ spec:
         name: pg-data
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: manual
         resources:
           requests:
             storage: 100Mi

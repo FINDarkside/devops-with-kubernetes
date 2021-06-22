@@ -5,6 +5,10 @@ metadata:
   namespace: project
 spec:
   replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: app2
@@ -19,12 +23,12 @@ spec:
             claimName: example-claim
       containers:
         - name: app2
-          image: findarkside/app2:3511a0819ee6646dcd22d011
+          image: findarkside/app2:cbecb6e122bcc032a55c7b65
           volumeMounts:
             - name: shared-files
               mountPath: /usr/src/app/files
         - name: app2-api
-          image: findarkside/app2-api:60f4d314b932bf6315b38236
+          image: findarkside/app2-api:34fc347be0b8279bcf66acd0
           envFrom:
           - secretRef:
               name: pg-password

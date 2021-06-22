@@ -4,7 +4,7 @@ metadata:
   name: app3-svc
   namespace: main-app
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: app3
   ports:

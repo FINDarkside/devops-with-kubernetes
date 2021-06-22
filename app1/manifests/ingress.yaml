@@ -10,8 +10,8 @@ spec:
       - path: /
         backend:
           serviceName: app1-svc
-          servicePort: 2346
+          servicePort: 80
       - path: /pingpong
         backend:
           serviceName: app3-svc
-          servicePort: 2347
+          servicePort: 80

@@ -4,7 +4,7 @@ metadata:
   name: app2-svc
   namespace: project
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: app2
   ports:
