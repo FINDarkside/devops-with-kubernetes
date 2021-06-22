@@ -22,4 +22,4 @@ jobs:
         project_id: ${{ secrets.GKE_PROJECT }}
 
     - run: gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
-    - run: kubectl delete namespace ${github.event.ref}
+    - run: kubectl delete namespace ${{ github.event.ref }}
