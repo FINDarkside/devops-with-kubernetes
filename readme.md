@@ -28,3 +28,6 @@ Cons:
 * Harder to setup, maintain, backup and scale
 * Likely less reliable
 
+### Exercise 3.07
+
+I chose Postgres with PersistentVolumeClaims because it has already been setup and because it makes it easier to develop locally with k3d.
