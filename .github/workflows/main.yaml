@@ -30,6 +30,7 @@ jobs:
         echo "name=WEB_WITH_TAG::gcr.io/${{ secrets.GKE_PROJECT }}/app2/web:${GITHUB_REF#refs/heads/}-$GITHUB_SHA >> $GITHUB_ENV"
         echo "name=API_WITH_TAG::gcr.io/${{ secrets.GKE_PROJECT }}/app2/api:${GITHUB_REF#refs/heads/}-$GITHUB_SHA >> $GITHUB_ENV"
         echo "name=DAILY_TODO_WITH_TAG::gcr.io/${{ secrets.GKE_PROJECT }}/app2/daily_todo:${GITHUB_REF#refs/heads/}-$GITHUB_SHA >> $GITHUB_ENV"
+        echo "{{ env.$WEB_WITH_TAG }}"
 
     - name: Build
       run: |-
