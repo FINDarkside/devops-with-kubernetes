@@ -6,6 +6,7 @@ on:
 env:
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-north1-b
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
 jobs:
   build-publish-deploy:
@@ -27,24 +28,22 @@ jobs:
 
     - name: Create image name and tag
       run: |-
-        echo "name=WEB_WITH_TAG::gcr.io/${{ secrets.GKE_PROJECT }}/app2/web:${GITHUB_REF#refs/heads/}-$GITHUB_SHA >> $GITHUB_ENV"
-        echo "name=API_WITH_TAG::gcr.io/${{ secrets.GKE_PROJECT }}/app2/api:${GITHUB_REF#refs/heads/}-$GITHUB_SHA >> $GITHUB_ENV"
-        echo "name=DAILY_TODO_WITH_TAG::gcr.io/${{ secrets.GKE_PROJECT }}/app2/daily_todo:${GITHUB_REF#refs/heads/}-$GITHUB_SHA >> $GITHUB_ENV"
-        echo "action_state=yellow" >> $GITHUB_ENV
-        echo "${{ env.action_state }}"
+        echo "::set-env name=WEB_WITH_TAG::gcr.io/${{ secrets.GKE_PROJECT }}/app2/web:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
+        echo "::set-env name=API_WITH_TAG::gcr.io/${{ secrets.GKE_PROJECT }}/app2/api:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
+        echo "::set-env name=DAILY_TODO_WITH_TAG::gcr.io/${{ secrets.GKE_PROJECT }}/app2/daily_todo:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
 
     - name: Build
       run: |-
-        docker build --tag "${{ env.WEB_WITH_TAG }}" ./app2/web
-        docker build --tag "${{ env.API_WITH_TAG }}" ./app2/api
-        docker build --tag "${{ env.DAILY_TODO_WITH_TAG }}" ./app2/daily-todo
+        docker build --tag "$WEB_WITH_TAG" ./app2/web
+        docker build --tag "$API_WITH_TAG" ./app2/api
+        docker build --tag "$DAILY_TODO_WITH_TAG" ./app2/daily-todo
       working-directory: ./app2
 
     - name: Publish
       run: |-
-        docker push "${{ env.WEB_WITH_TAG }}"
-        docker push "${{ env.API_WITH_TAG }}"
-        docker push "${{ env.DAILY_TODO_WITH_TAG}}"
+        docker push "$WEB_WITH_TAG"
+        docker push "$API_WITH_TAG"
+        docker push "$DAILY_TODO_WITH_TAG"
 
     - name: Set up Kustomize
       working-directory: ./app2
@@ -55,9 +54,9 @@ jobs:
     - name: Deploy
       working-directory: ./app2
       run: |-
-        ./kustomize edit set image PROJECT/WEB=${{ env.WEB_WITH_TAG }}
-        ./kustomize edit set image PROJECT/API=${{ env.API_WITH_TAG }}
-        ./kustomize edit set image PROJECT/DAILY_TODO=${{ env.DAILY_TODO_WITH_TAG }}
+        ./kustomize edit set image PROJECT/WEB=$WEB_WITH_TAG
+        ./kustomize edit set image PROJECT/API=$API_WITH_TAG
+        ./kustomize edit set image PROJECT/DAILY_TODO=$DAILY_TODO_WITH_TAG
         kubectl apply -k .
         kubectl rollout status deployment app2-dep -n project
         
