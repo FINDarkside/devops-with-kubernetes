@@ -38,6 +38,7 @@ spec:
           volumeMounts:
             - name: pg-data
               mountPath: /var/lib/postgresql/data
+              subPath: postgres
           envFrom:
           - secretRef:
               name: pg-password
@@ -46,7 +47,6 @@ spec:
         name: pg-data
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: manual
         resources:
           requests:
             storage: 100Mi

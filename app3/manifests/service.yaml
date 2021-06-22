@@ -4,14 +4,10 @@ metadata:
   name: app3-svc
   namespace: main-app
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: app3
   ports:
-    - name: external
-      port: 2347
-      protocol: TCP
-      targetPort: 3000
     - name: http
       protocol: TCP
       port: 80
