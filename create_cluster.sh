@@ -3,3 +3,7 @@ kubectl create namespace main-app
 kubectl create namespace project
 docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
 docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube/pv3
+kubectl create namespace prometheus
+helm install prometheus-community/kube-prometheus-stack --generate-name --namespace prometheus
+kubectl create namespace loki-stack
+helm upgrade --install loki --namespace=loki-stack loki/loki-stack
