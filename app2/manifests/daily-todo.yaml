@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
           - name: daily-todo
-            image: findarkside/app2-daily-todo:5e7ab1fd5db5d857558edaac
+            image: PROJECT/DAILY_TODO
             env:
             - name: URL
               value: "http://app2-svc:2348/todos"

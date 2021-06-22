@@ -23,12 +23,12 @@ spec:
             claimName: example-claim
       containers:
         - name: app2
-          image: findarkside/app2:cbecb6e122bcc032a55c7b65
+          image: PROJECT/WEB
           volumeMounts:
             - name: shared-files
               mountPath: /usr/src/app/files
         - name: app2-api
-          image: findarkside/app2-api:34fc347be0b8279bcf66acd0
+          image: PROJECT/API
           envFrom:
           - secretRef:
               name: pg-password
