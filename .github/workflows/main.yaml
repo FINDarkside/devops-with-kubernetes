@@ -57,8 +57,11 @@ jobs:
         ./kustomize edit set image PROJECT/WEB=$WEB_WITH_TAG
         ./kustomize edit set image PROJECT/API=$API_WITH_TAG
         ./kustomize edit set image PROJECT/DAILY_TODO=$DAILY_TODO_WITH_TAG
+        kubectl create namespace ${GITHUB_REF#refs/heads/} || true
+        ./kustomize edit set namespace ${GITHUB_REF#refs/heads/}
         kubectl apply -k .
-        kubectl rollout status deployment app2-dep -n project
+        kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
+        kubectl rollout status deployment app2-dep
         
 
 
