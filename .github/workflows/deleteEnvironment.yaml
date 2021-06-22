@@ -2,6 +2,10 @@ name: Delete environment
 on:
   delete:
 
+env:
+  GKE_CLUSTER: dwk-cluster
+  GKE_ZONE: europe-north1-b
+
 jobs:
   delete-namespace:
     name: Delete namespace
