@@ -8,6 +8,7 @@ env:
 
 jobs:
   delete-namespace:
+    if: github.event.ref_type == 'branch'
     name: Delete namespace
     runs-on: ubuntu-latest
     
@@ -21,4 +22,4 @@ jobs:
         project_id: ${{ secrets.GKE_PROJECT }}
 
     - run: gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
-    - run: kubectl delete namespace ${GITHUB_REF#refs/heads/}
+    - run: kubectl delete namespace ${github.event.ref}
