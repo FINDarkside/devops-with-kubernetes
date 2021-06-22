@@ -23,11 +23,19 @@ spec:
           volumeMounts:
             - name: shared-files
               mountPath: /usr/src/app/files
+          resources:
+            limits:
+              cpu: "50m"
+              memory: "50Mi"
         - name: app1-hash
           image: findarkside/app1-hash:0e88d06ed139fccadc495764
           volumeMounts:
             - name: shared-files
               mountPath: /usr/src/app/files
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "100Mi"
           env:
             - name: MESSAGE
               valueFrom:
