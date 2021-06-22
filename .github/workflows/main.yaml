@@ -33,16 +33,16 @@ jobs:
 
     - name: Build
       run: |-
-        docker build --tag "{{env.$WEB_WITH_TAG}" ./app2/web
-        docker build --tag "{{env.$API_WITH_TAG}" ./app2/api
-        docker build --tag "{{env.$DAILY_TODO_WITH_TAG}" ./app2/daily-todo
+        docker build --tag "{{ env.$WEB_WITH_TAG }}" ./app2/web
+        docker build --tag "{{ env.$API_WITH_TAG }}" ./app2/api
+        docker build --tag "{{ env.$DAILY_TODO_WITH_TAG }}" ./app2/daily-todo
       working-directory: ./app2
 
     - name: Publish
       run: |-
-        docker push "${{env.WEB_WITH_TAG}"
-        docker push "${{env.API_WITH_TAG}"
-        docker push "${{env.DAILY_TODO_WITH_TAG}"
+        docker push "${{ env.WEB_WITH_TAG }}"
+        docker push "${{ env.API_WITH_TAG }}"
+        docker push "${{ env.DAILY_TODO_WITH_TAG}}"
 
     - name: Set up Kustomize
       working-directory: ./app2
@@ -53,9 +53,9 @@ jobs:
     - name: Deploy
       working-directory: ./app2
       run: |-
-        ./kustomize edit set image PROJECT/WEB=${{env.WEB_WITH_TAG}
-        ./kustomize edit set image PROJECT/API=${{env.API_WITH_TAG}
-        ./kustomize edit set image PROJECT/DAILY_TODO=${{env.DAILY_TODO_WITH_TAG}
+        ./kustomize edit set image PROJECT/WEB=${{ env.WEB_WITH_TAG }}
+        ./kustomize edit set image PROJECT/API=${{ env.API_WITH_TAG }}
+        ./kustomize edit set image PROJECT/DAILY_TODO=${{ env.DAILY_TODO_WITH_TAG }}
         kubectl apply -k .
         kubectl rollout status deployment app2-dep -n project
         
