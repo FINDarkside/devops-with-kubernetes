@@ -1,0 +1,1 @@
+kubeseal -o yaml < secret.yaml > ./manifests/sealedsecret.yaml

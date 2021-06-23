@@ -4,8 +4,22 @@ const cors = require('cors')
 const { Pool } = require('pg')
 
 let pool = null;
-
 let appReady = false
+
+const pgConfig = {
+    user: 'postgres',
+    host: 'postgres-svc',
+    database: 'postgres',
+    password: process.env.POSTGRES_PASSWORD,
+    port: 5432,
+}
+/* const pgConfig = {
+    user: 'postgres',
+    host: 'localhost',
+    database: 'tobenamed',
+    password: 'docker',
+    port: 5432,
+} */
 
 const app = express()
 app.use(bodyParser.json());
@@ -17,29 +31,30 @@ app.post('/todos', async (req, res) => {
     if (typeof todo.text !== 'string' || todo.text.length > 140)
         res.status(400).end()
     console.log(`New todo created: ${todo.text}`)
-    await pool.query('INSERT INTO todos (text) VALUES ($1)', [todo.text])
-    res.end()
+    const dbRes = await pool.query('INSERT INTO todos (text,done) VALUES ($1,FALSE) RETURNING *', [todo.text])
+    res.json(dbRes.rows[0])
 })
 
 app.get('/todos', async (req, res) => {
-    const todos = await pool.query('SELECT * FROM todos')
+    const todos = await pool.query('SELECT * FROM todos ORDER BY id')
     res.json(todos.rows)
+})
+
+app.put('/todos/:id', async (req, res) => {
+    const id = Number(req.params.id)
+    await pool.query('UPDATE todos SET done=$1 WHERE id=$2', [!!req.body.done, id])
+    res.end()
 })
 
 async function initApp() {
     do {
         try {
-            const newPool = new Pool({
-                user: 'postgres',
-                host: 'postgres-svc',
-                database: 'postgres',
-                password: process.env.POSTGRES_PASSWORD,
-                port: 5432,
-            })
+            const newPool = new Pool(pgConfig)
             await newPool.query(`
                 CREATE TABLE IF NOT EXISTS todos (
                     id SERIAL PRIMARY KEY,
-                    text VARCHAR
+                    text VARCHAR,
+                    done BOOLEAN
                 );
             `)
             pool = newPool

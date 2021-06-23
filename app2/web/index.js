@@ -3,7 +3,7 @@ const fetch = require('node-fetch')
 const fs = require('fs')
 
 const imgPath = '/usr/src/app/files/img.jpg'
-// const imgPath = '/home/jesse/img.jpg'
+//const imgPath = '/home/jesse/img.jpg'
 
 const app = express()
 

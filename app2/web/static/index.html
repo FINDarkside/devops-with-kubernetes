@@ -14,14 +14,17 @@
         <input v-model="newTodo" type="text" name="todo" maxlength="140">
         <button v-on:click="submit">Create TODO</button>
         <ul>
-            <li v-for="todo in todos">{{todo.text}}</li>
+            <li v-for="todo in todos">{{todo.text}}
+                <button v-if="!todo.done" v-on:click="markDone(todo)">Mark done</button>
+                <span v-else>Done</span>
+            </li>
         </ul>
     </div>
 
 </body>
 
 <script>
-    //const apiUrl = 'http://localhost:3001/todos'
+    // const apiUrl = 'http://localhost:3001/todos'
     const apiUrl = '/todos'
     const app = new Vue({
         el: '#app',
@@ -41,9 +44,23 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(todo),
-                })
-                this.todos.push(todo)
+                }).then(res => res.json())
+                this.todos.push(response)
             },
+            markDone: async function (todo) {
+                const newTodo = {
+                    ...todo,
+                    done: true,
+                }
+                await fetch(apiUrl + '/' + todo.id, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newTodo),
+                })
+                todo.done = true
+            }
         }
     })
 
