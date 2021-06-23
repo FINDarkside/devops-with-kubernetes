@@ -12,11 +12,6 @@ const pool = new Pool({
     password: process.env.POSTGRES_PASSWORD,
     port: 5432,
 })
-pool.on('connect', (client) => {
-    initDb()
-    dbConnected = true
-})
-
 
 const createTableQuery = `
     CREATE TABLE IF NOT EXISTS pingpong (
@@ -25,16 +20,16 @@ const createTableQuery = `
     );
 `
 async function initDb() {
-    await pool.connect()
+    const client = await pool.connect()
+    client.release()
+    dbConnected = true
     await pool.query(createTableQuery)
     await pool.query("INSERT INTO pingpong VALUES ('count',0) ON CONFLICT DO NOTHING")
     const res = await pool.query('SELECT * FROM pingpong')
     counter = res.rows[0].value
-    if (!dbConnected) {
-        app.listen(3000, () => {
-            console.log('Server started in port 3000')
-        })
-    }
+    app.listen(3000, () => {
+        console.log('Server started in port 3000')
+    })
 }
 initDb()
 
@@ -46,6 +41,7 @@ app.get('*', (req, res) => {
 
 const healthCheckApp = express()
 healthCheckApp.get('/healthz', (req, res) => {
+    console.log(dbConnected)
     res.status(dbConnected ? 200 : 500).end()
 })
 healthCheckApp.listen(3541)

@@ -24,7 +24,10 @@ healthCheckApp.get('/healthz', (req, res) => {
     // Readiness probe should fail after 1s, so no need to timeout manually
     fetch('http://app3-svc/')
         .then(() => res.status(200).end())
-        .catch(() => res.status(500).end())
+        .catch((err) => {
+            console.error(err)
+            res.status(500).end()
+        })
 
 })
 healthCheckApp.listen(3541)
