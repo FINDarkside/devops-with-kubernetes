@@ -31,3 +31,7 @@ Cons:
 ### Exercise 3.07
 
 I chose Postgres with PersistentVolumeClaims because it has already been setup and because it makes it easier to develop locally with k3d.
+
+### Exercise 4.03
+
+`count(kube_pod_info{namespace="prometheus",created_by_kind="StatefulSet"})`
