@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: app3
-          image: findarkside/app3:5ecb1b2d1fc063b80b206a2c
+          image: findarkside/app3:6ac4605f860daee7f9d65678
           envFrom:
           - secretRef:
               name: pg-password
@@ -23,3 +23,9 @@ spec:
             limits:
               cpu: "100m"
               memory: "100Mi"
+          readinessProbe:
+            initialDelaySeconds: 10 # Initial delay until the readiness is tested
+            periodSeconds: 5 # How often to test
+            httpGet:
+              path: /healthz
+              port: 3541

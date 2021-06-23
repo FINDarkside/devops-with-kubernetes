@@ -18,3 +18,13 @@ app.get('/', async (req, res) => {
 app.listen(3000, () => {
     // console.log('Server started in port 3000')
 })
+
+const healthCheckApp = express()
+healthCheckApp.get('/healthz', (req, res) => {
+    // Readiness probe should fail after 1s, so no need to timeout manually
+    fetch('http://app3-svc/')
+        .then(() => res.status(200).end())
+        .catch(() => res.status(500).end())
+
+})
+healthCheckApp.listen(3541)

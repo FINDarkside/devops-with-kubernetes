@@ -28,7 +28,7 @@ spec:
               cpu: "50m"
               memory: "50Mi"
         - name: app1-hash
-          image: findarkside/app1-hash:0e88d06ed139fccadc495764
+          image: findarkside/app1-hash:3e154d33b421157162a54211
           volumeMounts:
             - name: shared-files
               mountPath: /usr/src/app/files
@@ -36,6 +36,12 @@ spec:
             limits:
               cpu: "100m"
               memory: "100Mi"
+          readinessProbe:
+            initialDelaySeconds: 10 # Initial delay until the readiness is tested
+            periodSeconds: 5 # How often to test
+            httpGet:
+              path: /healthz
+              port: 3541
           env:
             - name: MESSAGE
               valueFrom:
