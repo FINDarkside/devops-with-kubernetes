@@ -7,7 +7,9 @@ spec:
   rules:
   - http:
       paths:
-      - path: /*
+      # Required on GKE for some reason
+      # - path: /*
+      - path: /
         backend:
           serviceName: app2-svc
           servicePort: 2345
