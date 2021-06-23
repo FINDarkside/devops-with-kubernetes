@@ -54,3 +54,6 @@ spec:
             httpGet:
               path: /healthz
               port: 3541
+          env:
+            - name: NATS_URL
+              value: nats://my-nats:4222

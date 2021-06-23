@@ -2,7 +2,11 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const { Pool } = require('pg')
+const { connect, StringCodec } = require('nats');
 
+const sc = StringCodec();
+/** @type {import('nats').NatsConnection} */
+let nc = null;
 let pool = null;
 let appReady = false
 
@@ -33,6 +37,8 @@ app.post('/todos', async (req, res) => {
     console.log(`New todo created: ${todo.text}`)
     const dbRes = await pool.query('INSERT INTO todos (text,done) VALUES ($1,FALSE) RETURNING *', [todo.text])
     res.json(dbRes.rows[0])
+
+    nc.publish('newTodo', sc.encode(JSON.stringify(dbRes.rows[0])))
 })
 
 app.get('/todos', async (req, res) => {
@@ -49,6 +55,7 @@ app.put('/todos/:id', async (req, res) => {
 async function initApp() {
     do {
         try {
+            nc = await connect({ servers: process.env.NATS_URL })
             const newPool = new Pool(pgConfig)
             await newPool.query(`
                 CREATE TABLE IF NOT EXISTS todos (
