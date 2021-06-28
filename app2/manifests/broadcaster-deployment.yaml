@@ -4,7 +4,7 @@ metadata:
   name: app2-broadcaster-dep
   namespace: project
 spec:
-  replicas: 6
+  replicas: 1
   selector:
     matchLabels:
       app: app2-broadcaster
