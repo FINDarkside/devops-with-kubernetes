@@ -2,7 +2,6 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: app2-ingress
-  namespace: project
 spec:
   rules:
   - http:

@@ -2,7 +2,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: app2-dep
-  namespace: project
 spec:
   replicas: 4
   selector:

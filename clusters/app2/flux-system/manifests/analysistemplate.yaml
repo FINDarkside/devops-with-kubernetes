@@ -2,7 +2,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
   name: cpu-usage
-  namespace: project
 spec:
   metrics:
   - name: cpu-usage
