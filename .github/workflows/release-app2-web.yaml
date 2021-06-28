@@ -49,6 +49,6 @@ jobs:
     - uses: EndBug/add-and-commit@v5
       with:
         add: 'app2/kustomization.yaml'
-        message: New version release for gitops-app ${{ github.sha }}
+        message: New version release for app2 ${{ github.sha }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
