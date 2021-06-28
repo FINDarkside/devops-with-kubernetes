@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: app2-broadcaster
-        image: PROJECT/BROADCASTER
+        image: findarkside/app2-broadcaster:1903afc937619d5a05642984
         envFrom:
           - secretRef:
               name: telegram-api-key
