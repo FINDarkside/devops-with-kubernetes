@@ -1,0 +1,13 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: dwk-gitops-app
+  namespace: flux-system
+spec:
+  sourceRef:
+    kind: GitRepository
+    name: dwk-repo
+  interval: 10m
+  path: ./app2/manifests # Path tells where to find the files. Excellent for "monorepos" where you have multiple different applications in one repository, like the example repository.
+  prune: true # This will make sure that deleting the file will delete the resource
+  validation: client # Who validates the objects. Server or the client.
