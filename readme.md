@@ -35,3 +35,12 @@ I chose Postgres with PersistentVolumeClaims because it has already been setup a
 ### Exercise 4.03
 
 `count(kube_pod_info{namespace="prometheus",created_by_kind="StatefulSet"})`
+
+### Exercise 5.04
+
+Rancher vs Anthos:
+
+Ranches wins because:
+* Is open source
+* Because of former, it's cheaper
+* Less vendor-lock in even though Anthos can be used on non google cloud clusters. On-premises anthos costs 3x more than Anthos on Google Cloud or AWS
