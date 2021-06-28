@@ -39,6 +39,7 @@ I chose Postgres with PersistentVolumeClaims because it has already been setup a
 ### Exercise 5.06
 
 Used technologies marked with green. Red for something I used was depending on.
+https://github.com/FINDarkside/devops-with-kubernetes/blob/master/landscape.png
 
 * etcd - Kubernetes
 * k3s - k3d
