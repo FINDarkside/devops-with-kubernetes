@@ -1,0 +1,1 @@
+flux bootstrap github --owner=FINDarkside --repository=devops-with-kubernetes --personal --private=false --branch=master

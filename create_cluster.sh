@@ -14,3 +14,4 @@ kubectl create namespace argo-rollouts
 kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml
 
 helm install my-nats nats/nats -n project
+./app2/seal.sh
