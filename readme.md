@@ -35,3 +35,11 @@ I chose Postgres with PersistentVolumeClaims because it has already been setup a
 ### Exercise 4.03
 
 `count(kube_pod_info{namespace="prometheus",created_by_kind="StatefulSet"})`
+
+### Exercise 5.06
+
+Used technologies marked with green. Red for something I used was depending on.
+
+* etcd - Kubernetes
+* k3s - k3d
+* containerd - k3s
