@@ -20,7 +20,8 @@ images:
 - name: PROJECT/BROADCASTER
   newName: findarkside/app2-broadcaster:1903afc937619d5a05642984
 - name: PROJECT/DAILY_TODO
-  newName: findarkside/app2-daily-todo:5e7ab1fd5db5d857558edaac
+  newName: findarkside/app2-daily-todo
+  newTag: 3956c0fd452a185f0f12767220ab8e71a043ea4b
 - name: PROJECT/WEB
   newName: findarkside/app2
   newTag: 2233065ea9b122fe6c82496252a561600fb41b48
