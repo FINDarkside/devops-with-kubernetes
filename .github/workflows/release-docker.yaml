@@ -1,4 +1,4 @@
-name: Release 4-gitops-app
+name: Release-app2-web
 
 on:
   push:
