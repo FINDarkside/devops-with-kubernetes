@@ -13,4 +13,4 @@ helm upgrade --install loki --namespace=loki-stack loki/loki-stack
 kubectl create namespace argo-rollouts
 kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml
 
-helm install my-nats nats/nats -n project2
+helm install my-nats nats/nats -n project

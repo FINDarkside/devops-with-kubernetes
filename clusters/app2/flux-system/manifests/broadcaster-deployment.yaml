@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app2-broadcaster-dep
+  namespace: project
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: app2-broadcaster
+  template:
+    metadata:
+      labels:
+        app: app2-broadcaster
+    spec:
+      containers:
+      - name: app2-broadcaster
+        image: PROJECT/BROADCASTER
+        envFrom:
+          - secretRef:
+              name: telegram-api-key
+        env:
+          - name: NATS_URL
+            value: nats://my-nats:4222
+            
