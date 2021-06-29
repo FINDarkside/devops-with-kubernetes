@@ -1,0 +1,20 @@
+{
+  "name": "controller",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@kubernetes/client-node": "^0.15.0",
+    "@types/node-fetch": "^2.5.10",
+    "json-stream": "^1.0.0",
+    "ndjson": "^2.0.0",
+    "node-fetch": "^2.6.1",
+    "request": "^2.88.2"
+  }
+}
