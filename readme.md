@@ -44,3 +44,12 @@ Ranches wins because:
 * Is open source
 * Because of former, it's cheaper
 * Less vendor-lock in even though Anthos can be used on non google cloud clusters. On-premises anthos costs 3x more than Anthos on Google Cloud or AWS
+
+### Exercise 5.06
+
+Used technologies marked with green. Red for something I used was depending on.
+https://github.com/FINDarkside/devops-with-kubernetes/blob/master/landscape.png
+
+* etcd - Kubernetes
+* k3s - k3d
+* containerd - k3s
