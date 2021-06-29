@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app2-dep
+  namespace: project
+spec:
+  selector:
+    matchLabels:
+      app: app2
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: app2
+    spec:
+      containers:
+      - image: PROJECT/WEB
+        name: app2
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - mountPath: /usr/src/app/files
+          name: shared-files
+      - env:
+        - name: NATS_URL
+          value: nats://my-nats:4222
+        envFrom:
+        - secretRef:
+            name: pg-password
+        image: PROJECT/API
+        name: app2-api
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 3541
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+      volumes:
+      - name: shared-files
+        persistentVolumeClaim:
+          claimName: example-claim

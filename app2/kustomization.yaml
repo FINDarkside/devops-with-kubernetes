@@ -3,7 +3,8 @@ kind: Kustomization
 #- manifests/deployment.yaml
 resources:
 - manifests/daily-todo.yaml
-- manifests/rollout.yaml
+#- manifests/rollout.yaml
+- manifests/deployment.yaml
 - manifests/ingress.yaml
 - manifests/persistentvolumeclaim.yaml
 - manifests/postgres.yaml

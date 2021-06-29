@@ -15,3 +15,8 @@ kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/argoproj/arg
 
 helm install my-nats nats/nats -n project
 ./app2/seal.sh
+
+linkerd install | kubectl apply -f -
+linkerd viz install | kubectl apply -f -
+linkerd jaeger install | kubectl apply -f -
+linkerd multicluster install | kubectl apply -f -
