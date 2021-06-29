@@ -15,15 +15,6 @@ const k8sApi = kc.makeApiClient(k8s.CoreV1Api)
 const k8sNetworkingApi = kc.makeApiClient(k8s.NetworkingV1beta1Api)
 const k8sDeploymentApi = kc.makeApiClient(k8s.AppsV1Api)
 
-/**
- * @param {string} api 
- * @param {import('node-fetch').RequestInit} opts 
- */
-async function sendApiRequest(api, opts) {
-    return fetch(`${kc.getCurrentCluster().server}${api}`, opts)
-        .then(res => res.json)
-}
-
 async function init() {
     await watchForDummySiteResources()
 }
@@ -33,7 +24,6 @@ async function watchForDummySiteResources() {
     const dummySiteStream = new JSONStream()
     dummySiteStream.on('data', async ({ type, object }) => {
         if (type === 'ADDED') {
-            const siteUrl = object.spec.url
             const opts = {
                 url: object.spec.url,
                 name: object.metadata.name,
@@ -46,7 +36,6 @@ async function watchForDummySiteResources() {
             } catch (err) {
                 console.log(JSON.stringify(err))
             }
-
         }
     })
     request.get(`${kc.getCurrentCluster().server}/apis/stable.dwk/v1/dummysites?watch=true`, opts).pipe(dummySiteStream)
