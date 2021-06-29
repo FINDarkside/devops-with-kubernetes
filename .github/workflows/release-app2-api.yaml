@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - 'app2/**/api'
+      - 'app2/api/**'
       - '.github/workflows/release-app2-api.yaml'
 
 jobs:

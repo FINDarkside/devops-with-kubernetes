@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - 'app2/**/broadcaster'
+      - 'app2/broadcaster/**'
       - '.github/workflows/release-app2-broadcaster.yaml'
 
 jobs:

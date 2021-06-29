@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - 'app2/**/web'
+      - 'app2/web/**'
       - '.github/workflows/release-app2-web.yaml'
 
 jobs:

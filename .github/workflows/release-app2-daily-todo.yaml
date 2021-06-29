@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - 'app2/**/daily-todo'
+      - 'app2/daily-todo/**'
       - '.github/workflows/release-app2-daily-todo.yaml'
 
 jobs:
