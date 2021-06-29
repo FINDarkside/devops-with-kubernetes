@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - 'app2/**/web'
-      - '.github/workflows/release-docker.yaml'
+      - '.github/workflows/release-app2-web.yaml'
 
 jobs:
   build:

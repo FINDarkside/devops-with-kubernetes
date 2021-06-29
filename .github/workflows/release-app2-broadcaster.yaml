@@ -1,12 +1,12 @@
-name: Release-app2-daily-todo
+name: Release-app2-broadcaster
 
 on:
   push:
     branches:
       - master
     paths:
-      - 'app2/**/daily-todo'
-      - '.github/workflows/release-docker.yaml'
+      - 'app2/**/broadcaster'
+      - '.github/workflows/release-app2-broadcaster.yaml'
 
 jobs:
   build:
@@ -19,11 +19,11 @@ jobs:
     - name: Publish web app
       uses: docker/build-push-action@v1
       with:
-        repository: findarkside/app2-daily-todo
+        repository: findarkside/app2-broadcaster
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         tags: ${{ github.sha }}
-        path: app2/daily-todo
+        path: app2/broadcaster
 
   deploy:
     name: Deploy
@@ -43,12 +43,12 @@ jobs:
     - name: Update yamls
       working-directory: app2/
       run: |-
-        ./kustomize edit set image PROJECT/DAILY_TODO=findarkside/app2-daily-todo:${{ github.sha }}
+        ./kustomize edit set image PROJECT/BROADCASTER=findarkside/app2-broadcaster:${{ github.sha }}
 
     # Commit and push
     - uses: EndBug/add-and-commit@v5
       with:
         add: 'app2/kustomization.yaml'
-        message: New version release for app2-daily-todo ${{ github.sha }}
+        message: New version release for app2-broadcaster ${{ github.sha }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

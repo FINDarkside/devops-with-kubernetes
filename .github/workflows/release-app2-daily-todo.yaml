@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - 'app2/**/daily-todo'
-      - '.github/workflows/release-docker.yaml'
+      - '.github/workflows/release-app2-daily-todo.yaml'
 
 jobs:
   build:
