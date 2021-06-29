@@ -18,7 +18,8 @@ images:
 - name: PROJECT/API
   newName: findarkside/app2-api:20bd04c321fe80af48ccb4c3
 - name: PROJECT/BROADCASTER
-  newName: findarkside/app2-broadcaster:1903afc937619d5a05642984
+  newName: findarkside/app2-broadcaster
+  newTag: d120450a436ddf1ccec91fb1d28f175f098a461c
 - name: PROJECT/DAILY_TODO
   newName: findarkside/app2-daily-todo
   newTag: f8c8770f653f8e310395b7bad4c188a1a80e4f0a
