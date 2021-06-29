@@ -18,7 +18,7 @@ async function init() {
             const event = sc.decode(msg.data)
             console.log(event)
             const formattedJson = JSON.stringify(JSON.parse(event), null, 4)
-            const msgToSend = `New TODO: \n${formattedJson}`
+            const msgToSend = `New TODO! \n${formattedJson}`
             chatIds.forEach((chatId) => {
                 bot.sendMessage(chatId, msgToSend)
             })
