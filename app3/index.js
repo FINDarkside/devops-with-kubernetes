@@ -1,8 +1,7 @@
 const express = require('express')
-const { Pool, Client } = require('pg')
+const { Pool } = require('pg')
 const app = express()
 
-let counter = 0
 let dbConnected = false
 
 const pool = new Pool({
@@ -25,17 +24,16 @@ async function initDb() {
     dbConnected = true
     await pool.query(createTableQuery)
     await pool.query("INSERT INTO pingpong VALUES ('count',0) ON CONFLICT DO NOTHING")
-    const res = await pool.query('SELECT * FROM pingpong')
-    counter = res.rows[0].value
-    app.listen(3000, () => {
-        console.log('Server started in port 3000')
+    app.listen(8080, () => {
+        console.log('Server started in port 8080')
     })
 }
 initDb()
 
-app.get('*', (req, res) => {
-    counter++
-    pool.query('UPDATE pingpong SET value=$1', [counter])
+app.get('*', async (req, res) => {
+    const response = await pool.query('UPDATE pingpong SET value=value+1 RETURNING value')
+    console.log(response.rows)
+    const counter = response.rows[0].value
     res.end('pong ' + counter)
 })
 
